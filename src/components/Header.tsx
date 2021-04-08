@@ -1,5 +1,9 @@
-import { Flex, Text, Input, Icon } from "@chakra-ui/react";
-import { RiSearchLine } from "react-icons/ri";
+import { Flex, Text, Input, Icon, HStack, Box, Avatar } from "@chakra-ui/react";
+import {
+  RiSearchLine,
+  RiNotificationLine,
+  RiUserAddLine,
+} from "react-icons/ri";
 /* 
 Sempre que eu colocar um numero em string, ele irá entender que quero 
 no formato de espaçamento, por exemplo h="20" => 20x4 = 80px;
@@ -50,6 +54,35 @@ export function Header() {
         />
 
         <Icon as={RiSearchLine} fontSize="20" />
+      </Flex>
+
+      <Flex align="center" ml="auto">
+        <HStack
+          spacing="8"
+          mx="8"
+          pr="8"
+          py="1"
+          color="gray.300"
+          borderRightWidth={1}
+          borderColor="gray.700"
+        >
+          <Icon as={RiNotificationLine} fontSize="20" />
+          <Icon as={RiUserAddLine} fontSize="20" />
+        </HStack>
+        <Flex align="center">
+          <Box mr="4" textAlign="right">
+            <Text>Lucas Rosa</Text>
+            <Text color="gray.300" fontSize="smaill">
+              lucassantosrosa51@gmail.com
+            </Text>
+          </Box>
+
+          <Avatar
+            size="md"
+            name="Lucas Rosa"
+            src="https://github.com/bluniz.png"
+          />
+        </Flex>
       </Flex>
     </Flex>
   );
