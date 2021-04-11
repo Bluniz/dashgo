@@ -1,25 +1,30 @@
 import {
-  Link,
+  Link as ChakraLink,
   Text,
   Icon,
   LinkProps as ChakraLinkProps,
 } from "@chakra-ui/react";
 import { ElementType } from "react";
+import Link from "next/link";
 
 //! Element type é equanto passo o nome de um elemento(A referência)
 //! e não a declaração
 interface NavLinkProps extends ChakraLinkProps {
   icon: ElementType;
   children: string;
+  href: string;
 }
-
-export function NavLink({ icon, children, ...rest }: NavLinkProps) {
+//! Quanto n tivermos uma ancora(a), podemos usar o passHref
+//? Ele vai passar como uma propriedade forçada como atributo do primeiro Filho
+export function NavLink({ icon, children, href, ...rest }: NavLinkProps) {
   return (
-    <Link display="flex" align="center" {...rest}>
-      <Icon as={icon} fontSize="20" />
-      <Text ml="4" fontWeight="medium">
-        {children}
-      </Text>
+    <Link href={href} passHref>
+      <ChakraLink display="flex" align="center" {...rest}>
+        <Icon as={icon} fontSize="20" />
+        <Text ml="4" fontWeight="medium">
+          {children}
+        </Text>
+      </ChakraLink>
     </Link>
   );
 }
