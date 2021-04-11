@@ -1,11 +1,10 @@
-import { Button } from "@chakra-ui/button";
 import { Box, Stack } from "@chakra-ui/layout";
 import { PaginationItem } from "./PaginationItem";
 
 export function Pagination() {
   return (
     <Stack
-      direction="row"
+      direction={["column", "row"]}
       mt="8"
       justify="space-between"
       align="center"
