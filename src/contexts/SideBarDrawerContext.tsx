@@ -1,5 +1,6 @@
 import { useDisclosure, UseDisclosureReturn } from "@chakra-ui/hooks";
-import { createContext, ReactNode, useContext } from "react";
+import { useRouter } from "next/router";
+import { createContext, ReactNode, useContext, useEffect } from "react";
 
 interface SideBarDrawerProviderProps {
   children: ReactNode;
@@ -13,6 +14,12 @@ export function SideBarDrawerProvider({
   children,
 }: SideBarDrawerProviderProps) {
   const disclosure = useDisclosure();
+  const router = useRouter();
+
+  //? Sempre que uma rota mudar, feche o drawer
+  useEffect(() => {
+    disclosure.onClose();
+  }, [router.asPath]);
 
   return (
     <SideBarDrawerContext.Provider value={disclosure}>
