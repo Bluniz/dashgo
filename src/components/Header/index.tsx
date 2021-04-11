@@ -1,4 +1,6 @@
-import { Flex, useBreakpointValue } from "@chakra-ui/react";
+import { Flex, Icon, IconButton, useBreakpointValue } from "@chakra-ui/react";
+import { RiMenuLine } from "react-icons/ri";
+import { useSideBarDrawer } from "../../contexts/SideBarDrawerContext";
 import { Logo } from "./Logo";
 import { NotificationNav } from "./NotificationNav";
 import { Profile } from "./Profile";
@@ -12,6 +14,8 @@ no formato de espaçamento, por exemplo h="20" => 20x4 = 80px;
 
 */
 export function Header() {
+  const { onOpen } = useSideBarDrawer();
+
   //! Por padrão não estão visiveis
   //? Quando passar no LG vai ficar visivel
   const isWideVersion = useBreakpointValue({
@@ -30,6 +34,17 @@ export function Header() {
       mt="4"
       px="6"
     >
+      {!isWideVersion && (
+        <IconButton
+          aria-label="Open Navigation"
+          icon={<Icon as={RiMenuLine} />}
+          fontSize="24"
+          variant="unstyled"
+          onClick={onOpen}
+          mr="2"
+        ></IconButton>
+      )}
+
       <Logo />
 
       {isWideVersion && <SearchBox />}
