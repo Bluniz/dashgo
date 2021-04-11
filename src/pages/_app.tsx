@@ -1,13 +1,16 @@
 import { AppProps } from "next/app";
 import { ChakraProvider } from "@chakra-ui/react";
 import { theme } from "../styles/theme";
+import { SideBarDrawerProvider } from "../contexts/SideBarDrawerContext";
 
 //! Por padrão o Chakra vem com o CSSReset como true.
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider theme={theme}>
-      <Component {...pageProps} />
+      <SideBarDrawerProvider>
+        <Component {...pageProps} />
+      </SideBarDrawerProvider>
     </ChakraProvider>
   );
 }
