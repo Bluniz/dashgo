@@ -5,7 +5,7 @@ import {
   LinkProps as ChakraLinkProps,
 } from "@chakra-ui/react";
 import { ElementType } from "react";
-import Link from "next/link";
+import { ActiveLink } from "../ActiveLink";
 
 //! Element type é equanto passo o nome de um elemento(A referência)
 //! e não a declaração
@@ -18,13 +18,13 @@ interface NavLinkProps extends ChakraLinkProps {
 //? Ele vai passar como uma propriedade forçada como atributo do primeiro Filho
 export function NavLink({ icon, children, href, ...rest }: NavLinkProps) {
   return (
-    <Link href={href} passHref>
+    <ActiveLink href={href} passHref>
       <ChakraLink display="flex" align="center" {...rest}>
         <Icon as={icon} fontSize="20" />
         <Text ml="4" fontWeight="medium">
           {children}
         </Text>
       </ChakraLink>
-    </Link>
+    </ActiveLink>
   );
 }
