@@ -5,7 +5,7 @@ import { cloneElement, ReactElement } from "react";
 //! ReactElement precisa ser um componente React
 interface ActiveLinkProps extends LinkProps {
   children: ReactElement;
-  shoutMatchExactHref: boolean;
+  shoutMatchExactHref?: boolean;
 }
 
 export function ActiveLink({
