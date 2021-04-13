@@ -1,5 +1,7 @@
 import { Flex, Button, Stack } from "@chakra-ui/react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { Input } from "../components/Form/Input";
 
 // Flex -> Div com display flex
@@ -9,13 +11,23 @@ type SignInFormData = {
   password: string;
 };
 
+const signInFormSchema = yup.object().shape({
+  email: yup.string().required("E-mail obrigatório").email("E-mail inválido"),
+  password: yup.string().required("Senha obrigatória"),
+});
+
 export default function SigIn() {
-  const { register, handleSubmit, formState } = useForm();
+  const { register, handleSubmit, formState } = useForm({
+    resolver: yupResolver(signInFormSchema),
+  });
+  const { errors } = formState;
 
   //? Essa função não recebe somente os valores, recebe também o evento
   //! Por ta tipado com SubmitHandler, o evento ja está tipado!
   const handleSignIn: SubmitHandler<SignInFormData> = async (values, event) => {
     console.log(values);
+
+    console.log(errors);
   };
 
   return (
@@ -35,12 +47,14 @@ export default function SigIn() {
             type="email"
             name="email"
             label="Email"
+            error={errors.email}
             {...register("email")}
           />
           <Input
             type="password"
             name="password"
             label="Senha"
+            error={errors.password}
             {...register("password")}
           />
 
