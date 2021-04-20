@@ -1,4 +1,5 @@
-import { createServer, Model } from "miragejs";
+import { createServer, Factory, Model } from "miragejs";
+import faker from "faker";
 
 type User = {
   name: string;
@@ -12,9 +13,33 @@ export function makeServer() {
       user: Model.extend<Partial<User>>({}),
     },
 
+    //! É uma forma de gerar dados em massa no mirajeJS.
+    factories: {
+      user: Factory.extend({
+        name(index: number) {
+          return `User ${index + 1}`;
+        },
+        email() {
+          //? Retorna um email de forma totalmente aleatoria
+          return faker.internet.email().toLowerCase();
+        },
+        createdAt() {
+          //? Quero que retorne todos os usuarios criados nos ultimos 10 dias
+          return faker.date.recent(10);
+        },
+      }),
+    },
+
+    seeds(server) {
+      //! Todas vezesq que iniciarmos um servidor do mirage
+      //! começaremos com 200 usuários.
+      server.createList("user", 200);
+    },
+
     routes() {
       this.namespace = "api"; //? Todas as rotas são precisar chamar api, por exemplo /api/users
       this.timing = 750; //? Todas as chamadas para a api do mirage, fique com um delay de 750 seg
+
       this.get("/users"); //! Vai entender para retornar todos os dados
       this.post("/users"); //! Vai criar a estrutura necessária para criar um usuário sem passar muita coisa
 
