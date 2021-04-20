@@ -4,6 +4,7 @@ import { theme } from "../styles/theme";
 import { SideBarDrawerProvider } from "../contexts/SideBarDrawerContext";
 import { makeServer } from "../services/mirage";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 
 //! Por padrão o Chakra vem com o CSSReset como true.
 
@@ -23,6 +24,8 @@ function MyApp({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </SideBarDrawerProvider>
       </ChakraProvider>
+
+      <ReactQueryDevtools />
     </QueryClientProvider>
   );
 }
