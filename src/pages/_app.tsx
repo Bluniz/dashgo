@@ -3,6 +3,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { theme } from "../styles/theme";
 import { SideBarDrawerProvider } from "../contexts/SideBarDrawerContext";
 import { makeServer } from "../services/mirage";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 //! Por padrão o Chakra vem com o CSSReset como true.
 
@@ -12,12 +13,17 @@ function MyApp({ Component, pageProps }: AppProps) {
     makeServer();
   }
 
+  //! Definindo cliente e provider
+  const queryClient = new QueryClient();
+
   return (
-    <ChakraProvider theme={theme}>
-      <SideBarDrawerProvider>
-        <Component {...pageProps} />
-      </SideBarDrawerProvider>
-    </ChakraProvider>
+    <QueryClientProvider client={queryClient}>
+      <ChakraProvider theme={theme}>
+        <SideBarDrawerProvider>
+          <Component {...pageProps} />
+        </SideBarDrawerProvider>
+      </ChakraProvider>
+    </QueryClientProvider>
   );
 }
 
