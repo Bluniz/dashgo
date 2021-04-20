@@ -33,7 +33,7 @@ export function makeServer() {
     seeds(server) {
       //! Todas vezesq que iniciarmos um servidor do mirage
       //! começaremos com 200 usuários.
-      server.createList("user", 200);
+      server.createList("user", 10);
     },
 
     routes() {
