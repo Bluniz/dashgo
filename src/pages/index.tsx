@@ -25,6 +25,7 @@ export default function SigIn() {
   //? Essa função não recebe somente os valores, recebe também o evento
   //! Por ta tipado com SubmitHandler, o evento ja está tipado!
   const handleSignIn: SubmitHandler<SignInFormData> = async (values, event) => {
+    await new Promise((resolve) => setTimeout(() => {}, 2000));
     console.log(values);
 
     console.log(errors);
