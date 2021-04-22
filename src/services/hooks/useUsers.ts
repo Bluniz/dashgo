@@ -11,7 +11,6 @@ type User = {
 // Desacoplou a função do react query
 export async function getUsers(): Promise<User[]> {
   const { data } = await api.get("/users");
-
   const users = data.users.map((user) => {
     return {
       id: user.id,
