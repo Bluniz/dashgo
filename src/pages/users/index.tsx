@@ -15,7 +15,6 @@ import {
   useBreakpointValue,
   Spinner,
 } from "@chakra-ui/react";
-import { useQuery } from "react-query"; //! Utilizado para fazer as requisições
 
 import { RiAddLine } from "react-icons/ri";
 import { Header } from "../../components/Header";
@@ -23,36 +22,10 @@ import { Pagination } from "../../components/Pagination";
 import { SideBar } from "../../components/SideBar";
 
 import Link from "next/link";
-import { api } from "../../services/api";
+import { useUsers } from "../../services/hooks/useUsers";
 
 export default function UserList() {
-  const { data, isLoading, isFetching, error } = useQuery(
-    "users",
-    async () => {
-      const { data } = await api.get("/users");
-
-      const users = data.users.map((user) => {
-        return {
-          id: user.id,
-          name: user.name,
-          email: user.email,
-          createdAt: new Date(user.createdAt).toLocaleDateString("pt-BR", {
-            day: "2-digit",
-            month: "long",
-            year: "numeric",
-          }),
-        };
-      });
-
-      return users;
-    },
-    {
-      staleTime: 1000 * 5, //! Por 5 segundos ela vai ser "fresh", não vai precisar ser recarregada
-    }
-  );
-  //! Nome para essa query, esse nome será a chave que será armazenada no cash
-  //! Como segundo parametro definir uma função para me retornar esses dados.
-
+  const { data, isLoading, isFetching, error } = useUsers();
   const isWideVersion = useBreakpointValue({
     base: false,
     lg: true,
