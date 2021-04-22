@@ -5,6 +5,7 @@ import { SideBarDrawerProvider } from "../contexts/SideBarDrawerContext";
 import { makeServer } from "../services/mirage";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
+import { queryClient } from "../services/queryClient";
 
 //! Por padrão o Chakra vem com o CSSReset como true.
 
@@ -13,9 +14,6 @@ function MyApp({ Component, pageProps }: AppProps) {
   if (process.env.NODE_ENV === "development") {
     makeServer();
   }
-
-  //! Definindo cliente e provider
-  const queryClient = new QueryClient();
 
   return (
     <QueryClientProvider client={queryClient}>

@@ -62,6 +62,7 @@ export function makeServer() {
           { users } //! Registros/Dados
         );
       }); //! Vai entender para retornar todos os dados
+      this.get("/users/:id"); //! Vai criar automaticamente uma rota para listarmos o usuário por id
       this.post("/users"); //! Vai criar a estrutura necessária para criar um usuário sem passar muita coisa
 
       this.namespace = "";

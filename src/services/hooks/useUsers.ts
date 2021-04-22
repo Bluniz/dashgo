@@ -41,7 +41,7 @@ export async function getUsers(page: number): Promise<getUsersResponse> {
 
 export function useUsers(page: number) {
   return useQuery(["users", page], () => getUsers(page), {
-    staleTime: 1000 * 5, //! Por 5 segundos ela vai ser "fresh", não vai precisar ser recarregada
+    staleTime: 1000 * 60 * 10, //! Por 10 minutos ela vai ser "fresh", não vai precisar ser recarregada
   });
   //! Nome para essa query, esse nome será a chave que será armazenada no cash
   //! Como segundo parametro definir uma função para me retornar esses dados.
